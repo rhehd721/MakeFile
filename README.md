@@ -120,3 +120,11 @@ B := $(A)
 A = a
 # B의 값은 비어있다. 
 ```
+
+## include
+```Makefile
+include make.common
+
+$(TARGET) : hello.o
+	$(cc) -o $(TARGET) hello.o
+```
