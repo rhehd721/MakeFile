@@ -128,3 +128,30 @@ include make.common
 $(TARGET) : hello.o
 	$(cc) -o $(TARGET) hello.o
 ```
+
+## wildcard
+- 현 디렉토리에서 주어진 패턴에 일치하는 파일을 찾아 리스트업 한다.
+```Makefile
+$(wildcard pattern)
+```
+- Ex
+```Makefile
+# 현 디렉토리의 모든 .c 파일 리스트
+$(wildcard *.c)
+# 모든 .o 파일 리스트
+OBJECTS := $(wildcard *.o)
+# .c 리스트에서 .c를 .o로 치환
+OBJECTS := $(patsubst %.c,%.o,$(wildcard *.c))
+```
+
+## export or unexport
+- 현재 makefile에서 선언된 변수를 다른 makefile에서도 사용가능하도록 하고자할 때
+- export : 모든 Makefile 참조 가능하게
+```Makefile
+export IPCUDS_LIB
+IPCUDSDIR	=../../lg_bridge/ipcuds
+IPCUDSLIB	=$(IPCUDSDIR)/libipcuds.so
+CFLAGS	      += -I$(IPCUDSDIR)
+COMMON_CFLAGS += -I$(IPCUDSDIR)
+IPCUDS_LIB     = libipcuds.so
+```
