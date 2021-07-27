@@ -155,3 +155,26 @@ CFLAGS	      += -I$(IPCUDSDIR)
 COMMON_CFLAGS += -I$(IPCUDSDIR)
 IPCUDS_LIB     = libipcuds.so
 ```
+
+## .SUFFIXES
+- 적용 전
+```makefile
+main.o : main.c
+    $(CC) $(CFLAGS) -c $^
+read.o : read.c
+    $(CC) $(CFLAGS) -c $^
+write.o : write.c
+    $(CC) $(CFLAGS) -c $^
+```
+- 적용 후
+```makefile
+.SUFFIXES: .c .o
+
+.c .o :
+    $(CC) $(CFLAGS) -c $<
+```
+
+# ERROR
+
+## *** missing separator. Stop.
+- tab 대신 space가 존재하여 발생하는 error
