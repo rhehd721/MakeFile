@@ -70,6 +70,21 @@ $(subst ame,AmE, game jame)
 $(strip a b c )
 #`a b c'
 ``` 
+- $(wildcard pattern) : 특정 파일 명칭 패턴을 통해 원하는 종류의 파일들을 불러오는데 사용
+```makefile
+$(wildcard ../target/*.c)
+# ../target/main.c ../target/source.c
+``` 
+- $(patsubst pattern,replacement,text) : subst와 다른점은 from, to와 같이 특정 문자열을 대체하는 것이 아닌, 특정 패턴을 대체한다는 것과 공백 문자로 각 단어를 구분한다는 것
+```makefile
+$(patsubst %.c,%.o,x.c.c bar.c)
+# x.c.o bar.o
+``` 
+- $(notdir names...) : names에 입력된 파일명들 중에서 경로라고 판단되는 부분은 제거
+```makefile
+$(notdir forge/target.c name.c pms/fiya.mp3)
+# target.c name.c fiya.mp3
+``` 
 
 ## EX
 - hello word Make 파일
